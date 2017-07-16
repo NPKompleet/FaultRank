@@ -19,6 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".provider.generated.FaultProvider"
+            android:authorities="com.example.phenomenon.faultrank.provider.authority"
+            android:exported="false" />
+
+        <service
+            android:name=".service.FaultUpdateService"
+            android:exported="false"/>
     </application>
 
 </manifest>

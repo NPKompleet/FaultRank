@@ -20,11 +20,13 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FaultListFragment.OnFragmentInteractionListener,
-        FaultDetailFragment.OnFragmentInteractionListener{
+        FaultDetailFragment.OnFragmentInteractionListener,
+        AddFaultFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,12 @@ public class MainActivity extends AppCompatActivity
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        FaultListFragment listFragment= FaultListFragment.newInstance("ss", "bb");
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.mainViewContainer, listFragment)
-                .commit();
+        if (savedInstanceState==null) {
+            FaultListFragment listFragment = FaultListFragment.newInstance("ss", "bb");
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.mainViewContainer, listFragment)
+                    .commit();
+        }
 
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         /*fab.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +65,14 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick(R.id.fab)
     public void clickView(View view){
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();*/
+
+        AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainViewContainer, addFaultFragment)
+                .commit();
+        fab.setImageResource(R.drawable.ic_save);
     }
 
     @Override
@@ -104,18 +113,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_fault_list) {
             // Handle the camera action
             FaultDetailFragment detailFragment= FaultDetailFragment.newInstance("ss", "bb");
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.mainViewContainer, detailFragment)
                     .commit();
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_add_fault) {
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_share) {
 
