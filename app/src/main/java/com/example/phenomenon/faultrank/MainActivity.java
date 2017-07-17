@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FaultListFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener, FaultListFragment.ListFragmentInteractionListener,
         FaultDetailFragment.OnFragmentInteractionListener,
         AddFaultFragment.OnFragmentInteractionListener{
 
@@ -37,22 +37,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         if (savedInstanceState==null) {
-            FaultListFragment listFragment = FaultListFragment.newInstance("ss", "bb");
+            FaultListFragment listFragment = FaultListFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.mainViewContainer, listFragment)
+                    .replace(R.id.mainViewContainer, listFragment)
                     .commit();
         }
 
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -114,13 +105,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_fault_list) {
-            // Handle the camera action
-            FaultDetailFragment detailFragment= FaultDetailFragment.newInstance("ss", "bb");
+            // display fault list
+            FaultListFragment listFragment = FaultListFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainViewContainer, detailFragment)
+                    .replace(R.id.mainViewContainer, listFragment)
                     .commit();
 
         } else if (id == R.id.nav_add_fault) {
+            AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mainViewContainer, addFaultFragment)
+                    .commit();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -140,5 +135,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(){
         //do nne
+    }
+
+    @Override
+    public void onListItemInteraction() {
+        FaultDetailFragment detailFragment= FaultDetailFragment.newInstance("ss");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainViewContainer, detailFragment)
+                .commit();
+
     }
 }

@@ -4,6 +4,7 @@ import android.app.Fragment;
 
 import android.content.ContentValues;
 
+import com.example.phenomenon.faultrank.AddFaultFragment;
 import com.example.phenomenon.faultrank.provider.FaultContract;
 import com.example.phenomenon.faultrank.service.FaultUpdateService;
 import com.example.phenomenon.faultrank.views.IAddFaultView;
@@ -20,14 +21,13 @@ import java.util.Date;
  */
 
 public class AddFaultPresenter {
-    private Fragment view;
+    private AddFaultFragment view;
 
     /**
-     *
      * @param view a Fragment that implemennts the @link IAddFaultView interface
      */
     public AddFaultPresenter(IAddFaultView view){
-        this.view= (Fragment)  view;
+        this.view= (AddFaultFragment)  view;
 
     }
 
