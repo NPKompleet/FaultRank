@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -67,6 +69,20 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final FloatingActionButton fab= getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mainViewContainer, addFaultFragment)
+                        .addToBackStack("addFault")
+                        .commit();
+                Snackbar.make(fab, "Save", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         presenter.initData();
 
     }
@@ -101,22 +117,13 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
     }
 
     @Override
-    public void faultSelected() {
+    public void faultSelected(Cursor cursor) {
         Toast.makeText(getActivity(), "fault", Toast.LENGTH_SHORT).show();
-        mListener.onListItemInteraction();
+        mListener.onListItemInteraction(cursor);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface ListFragmentInteractionListener {
-        void onListItemInteraction();
+        void onListItemInteraction(Cursor c);
     }
 }

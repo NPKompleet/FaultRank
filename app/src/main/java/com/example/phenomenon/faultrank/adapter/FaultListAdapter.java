@@ -29,7 +29,7 @@ public class FaultListAdapter extends RecyclerView.Adapter<FaultListAdapter.Faul
     private FaultClickListener listener;
 
     public interface FaultClickListener{
-        void faultSelected();
+        void faultSelected(Cursor cus);
     }
 
     public FaultListAdapter(Cursor cursor, FaultClickListener listener){
@@ -82,7 +82,9 @@ public class FaultListAdapter extends RecyclerView.Adapter<FaultListAdapter.Faul
                 itemView.setBackgroundColor(Color.BLUE);
                 textView.setTextColor(Color.RED);
             }*/
-            listener.faultSelected();
+            cursor.moveToPosition(getAdapterPosition());
+
+            listener.faultSelected(cursor);
         }
     }
 }

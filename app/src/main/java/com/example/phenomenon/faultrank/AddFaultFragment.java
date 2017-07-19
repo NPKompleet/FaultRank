@@ -118,6 +118,7 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         final FloatingActionButton fab= getActivity().findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_save);
         fab.setOnClickListener(new View.OnClickListener() {

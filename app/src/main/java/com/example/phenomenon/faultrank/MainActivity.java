@@ -1,6 +1,7 @@
 package com.example.phenomenon.faultrank;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.fab) FloatingActionButton fab;
+
+    //ArrayList<String> fragState=
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,10 +143,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListItemInteraction() {
-        FaultDetailFragment detailFragment= FaultDetailFragment.newInstance("ss");
+    public void onListItemInteraction(Cursor cursor) {
+        FaultDetailFragment detailFragment= FaultDetailFragment.newInstance(cursor);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainViewContainer, detailFragment)
+                .addToBackStack("detail")
                 .commit();
 
     }

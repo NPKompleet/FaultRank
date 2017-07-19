@@ -1,24 +1,36 @@
 package com.example.phenomenon.faultrank;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.phenomenon.faultrank.adapter.FaultListAdapter;
+import com.example.phenomenon.faultrank.presenters.FaultDetailPresenter;
+import com.example.phenomenon.faultrank.views.IFaultDetailView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FaultDetailFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FaultDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FaultDetailFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class FaultDetailFragment extends Fragment implements IFaultDetailView{
+    private static Cursor cursor;
+    Unbinder unbinder;
+    FaultDetailPresenter presenter;
+
+    @BindView(R.id.fault_detail_undertaking)
+    TextView utView;
+
+    // the fragment initialization parameters
     private static final String FAULT_PARAM = "fault";
 
     private String fault;
@@ -33,14 +45,15 @@ public class FaultDetailFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param c Cursor.
      * @return A new instance of fragment FaultDetailFragment.
      */
-    public static FaultDetailFragment newInstance(String param1) {
+    public static FaultDetailFragment newInstance(Cursor c) {
         FaultDetailFragment fragment = new FaultDetailFragment();
-        Bundle args = new Bundle();
+        cursor= c;
+        /*Bundle args = new Bundle();
         args.putString(FAULT_PARAM, param1);
-        fragment.setArguments(args);
+        fragment.setArguments(args);*/
         return fragment;
     }
 
@@ -55,8 +68,14 @@ public class FaultDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view= inflater.inflate(R.layout.fragment_fault_detail, container, false);
+        unbinder=ButterKnife.bind(this, view);
+        presenter = new FaultDetailPresenter(this);
+        loadDetail(cursor);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fault_detail, container, false);
+        return view;
     }
 
 
@@ -64,6 +83,25 @@ public class FaultDetailFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction();
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final FloatingActionButton fab= getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mainViewContainer, addFaultFragment)
+                        .addToBackStack("addFault")
+                        .commit();
+                Snackbar.make(fab, "Save", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
@@ -83,16 +121,23 @@ public class FaultDetailFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void loadDetail(Cursor cursor) {
+        presenter.loadDetail(cursor);
+    }
+
+    @Override
+    public void fillDetail(String... strings) {
+        utView.setText(strings[0]);
+    }
+
+
     public interface OnFragmentInteractionListener {
 
         void onFragmentInteraction();

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/add_fault_item_margin"
-    android:alpha="0.7"
+    android:alpha="0.9"
     tools:context="com.example.phenomenon.faultrank.FaultDetailFragment">
 
     <android.support.constraint.ConstraintLayout
@@ -14,7 +14,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:text="@string/hello_blank_fragment"
+            android:id="@+id/fault_detail_undertaking"/>
 
     </android.support.constraint.ConstraintLayout>
 
