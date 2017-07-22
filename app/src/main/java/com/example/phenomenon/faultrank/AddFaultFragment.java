@@ -3,8 +3,14 @@ package com.example.phenomenon.faultrank;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.phenomenon.faultrank.presenters.AddFaultPresenter;
 import com.example.phenomenon.faultrank.views.IAddFaultView;
@@ -30,11 +38,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AddFaultFragment.OnFragmentInteractionListener} interface
+ * {} interface
  * to handle interaction events.
  * Use the {@link AddFaultFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -43,6 +53,8 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     private AddFaultPresenter presenter= new AddFaultPresenter(this);
     private Unbinder unbinder;
 
+    @BindView(R.id.add_fault_image)
+    ImageView fView;
     @BindView(R.id.add_bu_spinner) EditText buView;
     @BindView(R.id.add_undertaking) EditText utView;
     @BindView(R.id.add_revenue) EditText revView;
@@ -59,6 +71,8 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static int RESULT_LOAD_IMG= 25;
+
 
     private String mParam1;
     private String mParam2;
@@ -73,11 +87,9 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment AddFaultFragment.
      */
-    public static AddFaultFragment newInstance(String param1, String param2) {
+    public static AddFaultFragment newInstance() {
         //AddFaultFragment fragment = new AddFaultFragment();
         /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -144,10 +156,25 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     }
 
 
-    @OnClick({R.id.add_bu_spinner, R.id.add_faultType, R.id.add_date})
+    @OnClick({R.id.goto_gallery, R.id.add_a_photo, R.id.add_bu_spinner, R.id.add_faultType, R.id.add_date})
     public void viewClicked(View view){
 
         switch (view.getId()){
+            case R.id.goto_gallery:
+
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+
+                Snackbar.make(view, "Save", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+
+            case R.id.add_a_photo:
+                Snackbar.make(view, "Save", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+
             case R.id.add_bu_spinner:
                 PopupMenu buPopUp = new PopupMenu(getContext(), buView);
                 buPopUp.getMenuInflater().inflate(R.menu.business_unit_pop_up, buPopUp.getMenu());
@@ -188,6 +215,25 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                fView.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(getActivity(), "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     public void onDetach() {

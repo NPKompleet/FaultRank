@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();*/
 
-        AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+        AddFaultFragment addFaultFragment= AddFaultFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainViewContainer, addFaultFragment)
                 .commit();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_add_fault) {
-            AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+            AddFaultFragment addFaultFragment= AddFaultFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.mainViewContainer, addFaultFragment)
                     .commit();

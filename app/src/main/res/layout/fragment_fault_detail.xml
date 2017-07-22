@@ -1,5 +1,6 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,11 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@drawable/substation"
+            android:scaleType="fitXY"
+            android:id="@+id/detail_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="8dp" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="352dp"
+            android:layout_height="201dp"
             android:text="@string/hello_blank_fragment"
-            android:id="@+id/fault_detail_undertaking"/>
+            android:id="@+id/fault_detail_undertaking"
+            app:layout_constraintTop_toBottomOf="@+id/detail_image"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/add_fault_item_margin"
+            tools:layout_editor_absoluteX="8dp" />
 
     </android.support.constraint.ConstraintLayout>
 

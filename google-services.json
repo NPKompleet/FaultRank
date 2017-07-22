@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "18915013176",
+    "firebase_url": "https://faultrankproject.firebaseio.com",
+    "project_id": "faultrankproject",
+    "storage_bucket": "faultrankproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18915013176:android:f9a5162ce435102d",
+        "android_client_info": {
+          "package_name": "com.example.phenomenon.faultrank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18915013176-3si490j3vo8korp5levrfii2nao0ufs0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phenomenon.faultrank",
+            "certificate_hash": "afa8f9c7a0b69146a959ed04fc99577a45610c2f"
+          }
+        },
+        {
+          "client_id": "18915013176-2q33rgmhbnu6rpgmucov851d8nq32j7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABAf7j_PRnY38xUEE9jZNMTk2cOlp-z5k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18915013176-2q33rgmhbnu6rpgmucov851d8nq32j7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

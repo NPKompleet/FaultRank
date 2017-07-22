@@ -35,6 +35,7 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
 
     private String fault;
 
+
     private OnFragmentInteractionListener mListener;
 
     public FaultDetailFragment() {
@@ -93,7 +94,7 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.mainViewContainer, addFaultFragment)
                         .addToBackStack("addFault")

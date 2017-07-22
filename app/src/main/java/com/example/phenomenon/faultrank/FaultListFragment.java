@@ -74,7 +74,7 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance("bo", "m");
+                AddFaultFragment addFaultFragment= AddFaultFragment.newInstance();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.mainViewContainer, addFaultFragment)
                         .addToBackStack("addFault")
