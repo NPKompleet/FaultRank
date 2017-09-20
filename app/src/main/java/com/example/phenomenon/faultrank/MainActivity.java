@@ -15,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.phenomenon.faultrank.model.Fault;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("faults");
     }
 
 
@@ -143,8 +148,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListItemInteraction(Cursor cursor) {
-        FaultDetailFragment detailFragment= FaultDetailFragment.newInstance(cursor);
+    public void onListItemInteraction(Fault fault) {
+        FaultDetailFragment detailFragment= FaultDetailFragment.newInstance(fault);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainViewContainer, detailFragment)
                 .addToBackStack("detail")

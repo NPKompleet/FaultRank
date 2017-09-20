@@ -19,6 +19,9 @@
     <string name="note">Add a Note&#8230;</string>
     <string name="faultType">Fault</string>
     <string name="cost">Cost</string>
+    <string name="market_efficiency">Market Efficiency</string>
+    <string name="availability">Availability</string>
+    <string name="location">Location</string>
 
     <!--Business Units-->
     <string name="bu_ikeja" translatable="false">Ikeja</string>

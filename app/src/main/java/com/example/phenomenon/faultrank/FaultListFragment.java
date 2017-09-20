@@ -16,8 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.phenomenon.faultrank.adapter.FaultListAdapter;
+import com.example.phenomenon.faultrank.model.Fault;
 import com.example.phenomenon.faultrank.presenters.FaultListPresenter;
 import com.example.phenomenon.faultrank.views.IFaultListView;
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +31,12 @@ import butterknife.Unbinder;
 
 
 public class FaultListFragment extends Fragment implements IFaultListView, FaultListAdapter.FaultClickListener{
+
+    @Inject
     FaultListPresenter presenter;
+
     Unbinder unbinder;
+    ArrayList<Fault> faults;
 
     @BindView(R.id.rv_fault_list) RecyclerView recyclerView;
 
@@ -54,12 +64,14 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_fault_list, container, false);
+        ((FaultRankApplication)getActivity().getApplication()).getAppComponent().inject(this);
         unbinder=ButterKnife.bind(this, v);
-        adapter= new FaultListAdapter(null, this);
+        presenter.setView(this);
+        adapter= new FaultListAdapter(faults, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(adapter);
-        presenter= new FaultListPresenter(this, this, getActivity());
+        //presenter= new FaultListPresenter();
 
         Toast.makeText(getActivity(), "do", Toast.LENGTH_SHORT).show();
 
@@ -105,9 +117,9 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
     }
 
     @Override
-    public void loadData(Cursor data) {
-        Toast.makeText(getActivity(), "count "+ data.getCount(), Toast.LENGTH_SHORT).show();
-        adapter.setCursor(data);
+    public void loadData(ArrayList<Fault> data) {
+        Toast.makeText(getActivity(), "count "+ data.size(), Toast.LENGTH_SHORT).show();
+        adapter.setData(data);
     }
 
     @Override
@@ -117,13 +129,13 @@ public class FaultListFragment extends Fragment implements IFaultListView, Fault
     }
 
     @Override
-    public void faultSelected(Cursor cursor) {
+    public void faultSelected(Fault fault) {
         Toast.makeText(getActivity(), "fault", Toast.LENGTH_SHORT).show();
-        mListener.onListItemInteraction(cursor);
+        mListener.onListItemInteraction(fault);
     }
 
 
     public interface ListFragmentInteractionListener {
-        void onListItemInteraction(Cursor c);
+        void onListItemInteraction(Fault f);
     }
 }

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.phenomenon.faultrank.adapter.FaultListAdapter;
+import com.example.phenomenon.faultrank.model.Fault;
 import com.example.phenomenon.faultrank.presenters.FaultDetailPresenter;
 import com.example.phenomenon.faultrank.views.IFaultDetailView;
 
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
 
 
 public class FaultDetailFragment extends Fragment implements IFaultDetailView{
-    private static Cursor cursor;
+    //private static Cursor cursor;
     Unbinder unbinder;
     FaultDetailPresenter presenter;
 
@@ -33,7 +34,7 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
     // the fragment initialization parameters
     private static final String FAULT_PARAM = "fault";
 
-    private String fault;
+    private Fault fault;
 
 
     private OnFragmentInteractionListener mListener;
@@ -46,15 +47,15 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param c Cursor.
+     * @param fault {@link Fault}.
      * @return A new instance of fragment FaultDetailFragment.
      */
-    public static FaultDetailFragment newInstance(Cursor c) {
+    public static FaultDetailFragment newInstance(Fault fault) {
         FaultDetailFragment fragment = new FaultDetailFragment();
-        cursor= c;
-        /*Bundle args = new Bundle();
-        args.putString(FAULT_PARAM, param1);
-        fragment.setArguments(args);*/
+        //fault= fault;
+        Bundle args = new Bundle();
+        args.putParcelable(FAULT_PARAM, fault);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -62,7 +63,7 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            fault = getArguments().getString(FAULT_PARAM);
+            fault = getArguments().getParcelable(FAULT_PARAM);
         }
     }
 
@@ -73,7 +74,8 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
         View view= inflater.inflate(R.layout.fragment_fault_detail, container, false);
         unbinder=ButterKnife.bind(this, view);
         presenter = new FaultDetailPresenter(this);
-        loadDetail(cursor);
+        presenter.loadDetail(fault);
+        //loadDetail(cursor);
 
         // Inflate the layout for this fragment
         return view;
@@ -128,10 +130,10 @@ public class FaultDetailFragment extends Fragment implements IFaultDetailView{
         unbinder.unbind();
     }
 
-    @Override
+    /*@Override
     public void loadDetail(Cursor cursor) {
         presenter.loadDetail(cursor);
-    }
+    }*/
 
     @Override
     public void fillDetail(String... strings) {

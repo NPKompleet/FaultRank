@@ -143,6 +143,21 @@
                         tools:layout_editor_absoluteX="92dp" />
 
 
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:minWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:id="@+id/add_market_efficiency"
+                    android:drawableStart="@drawable/ic_shopping_cart"
+                    android:drawablePadding="@dimen/add_fault_item_margin"
+                    android:hint="@string/market_efficiency"
+                    app:layout_constraintTop_toBottomOf="@+id/add_energy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteX="92dp" />
+
+
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -153,7 +168,7 @@
                         android:drawableStart="@drawable/ic_people"
                         android:drawablePadding="@dimen/add_fault_item_margin"
                         android:hint="@string/customers"
-                        app:layout_constraintTop_toBottomOf="@+id/add_energy"
+                        app:layout_constraintTop_toBottomOf="@+id/add_market_efficiency"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:layout_editor_absoluteX="92dp" />
@@ -187,6 +202,22 @@
                     android:hint="@string/cost"
                     tools:layout_editor_absoluteX="92dp" />
 
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:minWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="datetime"
+                    android:id="@+id/add_availability"
+                    android:drawableStart="@drawable/ic_24_hours_support"
+                    android:drawablePadding="@dimen/add_fault_item_margin"
+                    android:hint="@string/availability"
+                    app:layout_constraintTop_toBottomOf="@+id/add_cost"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteX="92dp" />
+
+
                 <EditText
                     android:layout_width="wrap_content"
                     android:minWidth="200dp"
@@ -196,11 +227,27 @@
                     android:drawableStart="@drawable/ic_date_range"
                     android:drawablePadding="@dimen/add_fault_item_margin"
                     android:hint="@string/date"
-                    app:layout_constraintTop_toBottomOf="@+id/add_cost"
+                    app:layout_constraintTop_toBottomOf="@+id/add_availability"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:focusable="false"
                     tools:layout_editor_absoluteX="92dp" />
+
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:minWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/add_location"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawablePadding="@dimen/add_fault_item_margin"
+                    android:hint="@string/location"
+                    app:layout_constraintTop_toBottomOf="@+id/add_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteX="92dp" />
+
 
             </android.support.constraint.ConstraintLayout>
 

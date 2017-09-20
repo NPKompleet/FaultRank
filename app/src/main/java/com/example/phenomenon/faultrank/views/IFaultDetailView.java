@@ -8,6 +8,6 @@ import android.database.Cursor;
  */
 
 public interface IFaultDetailView {
-    void loadDetail(Cursor cursor);
+    //void loadDetail(Cursor cursor);
     void fillDetail(String... strings);
 }

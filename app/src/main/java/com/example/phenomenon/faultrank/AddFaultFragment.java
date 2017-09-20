@@ -30,6 +30,8 @@ import android.widget.Toast;
 
 import com.example.phenomenon.faultrank.presenters.AddFaultPresenter;
 import com.example.phenomenon.faultrank.views.IAddFaultView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
@@ -59,10 +61,13 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     @BindView(R.id.add_undertaking) EditText utView;
     @BindView(R.id.add_revenue) EditText revView;
     @BindView(R.id.add_energy) EditText energyView;
+    @BindView(R.id.add_market_efficiency) EditText mEffView;
     @BindView(R.id.add_num_customers) EditText customerView;
     @BindView(R.id.add_faultType) EditText faultView;
     @BindView(R.id.add_cost) EditText costView;
+    @BindView(R.id.add_availability) EditText availView;
     @BindView(R.id.add_date) EditText dateView;
+    @BindView(R.id.add_location) EditText locView;
 
    /* @BindView(R.id.fab)
     FloatingActionButton fab;*/
@@ -78,6 +83,8 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    /*private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;*/
 
     public AddFaultFragment() {
         // Required empty public constructor
@@ -105,8 +112,6 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
 
     }
 
@@ -272,10 +277,14 @@ public class AddFaultFragment extends Fragment implements IAddFaultView, DatePic
                 utView.getText().toString(),
                 revView.getText().toString(),
                 energyView.getText().toString(),
+                mEffView.getText().toString(),
                 customerView.getText().toString(),
                 faultView.getText().toString(),
                 costView.getText().toString(),
-                dateView.getText().toString()
+                availView.getText().toString(),
+                dateView.getText().toString(),
+                locView.getText().toString()
+
         );
 
     }

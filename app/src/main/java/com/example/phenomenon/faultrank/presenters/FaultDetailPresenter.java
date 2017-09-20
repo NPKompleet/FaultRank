@@ -2,6 +2,7 @@ package com.example.phenomenon.faultrank.presenters;
 
 import android.database.Cursor;
 
+import com.example.phenomenon.faultrank.model.Fault;
 import com.example.phenomenon.faultrank.provider.FaultContract;
 import com.example.phenomenon.faultrank.views.IFaultDetailView;
 
@@ -18,9 +19,10 @@ public class FaultDetailPresenter {
         this.view= view;
     }
 
-    public void loadDetail(Cursor c){
+    public void loadDetail(Fault fault){
         view.fillDetail(
-                getColumnString(c, FaultContract.COLUMN_UNDERTAKING)
+                //getColumnString(c, FaultContract.COLUMN_UNDERTAKING)
+                fault.getUndertaking()
         );
     }
 }

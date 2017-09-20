@@ -27,21 +27,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OGBA"
-            android:id="@+id/list_undertakingName"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/listImage"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/list_faultType"
             android:text="Line"
             app:layout_constraintStart_toEndOf="@+id/listImage"
             android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@id/list_undertakingName"/>
+            android:layout_marginEnd="8dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OGBA"
+            android:id="@+id/list_undertakingName"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/list_faultType"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/listImage"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +56,27 @@
             android:text="2000 customers"
             app:layout_constraintStart_toEndOf="@+id/listImage"
             android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@id/list_faultType"/>
+            app:layout_constraintTop_toBottomOf="@+id/list_undertakingName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_duration"
+            android:text="since 2 days"
+            app:layout_constraintStart_toEndOf="@+id/listImage"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/list_customerPopulation"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_revenueImplication"
+            android:text="$2,536"
+            android:textColor="@color/primary_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/list_duration"
+            android:layout_marginEnd="8dp"/>
         
     </android.support.constraint.ConstraintLayout>
 
