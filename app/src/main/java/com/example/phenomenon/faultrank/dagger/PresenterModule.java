@@ -3,8 +3,6 @@ package com.example.phenomenon.faultrank.dagger;
 import android.content.Context;
 
 import com.example.phenomenon.faultrank.presenters.FaultListPresenter;
-import com.example.phenomenon.faultrank.views.IFaultListView;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,7 +18,7 @@ public class PresenterModule {
 
     @Singleton
     @Provides
-    public FaultListPresenter provideFaultListPresenter(){
-        return new FaultListPresenter();
+    public FaultListPresenter provideFaultListPresenter(Context context){
+        return new FaultListPresenter(context);
     }
 }

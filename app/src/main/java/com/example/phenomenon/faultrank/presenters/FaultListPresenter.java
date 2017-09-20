@@ -13,6 +13,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
 import com.example.phenomenon.faultrank.FaultListFragment;
+import com.example.phenomenon.faultrank.FaultRankApplication;
 import com.example.phenomenon.faultrank.MainActivity;
 import com.example.phenomenon.faultrank.R;
 import com.example.phenomenon.faultrank.model.Fault;
@@ -27,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -39,16 +42,21 @@ public class FaultListPresenter /*implements LoaderManager.LoaderCallbacks<Curso
     //private FaultListFragment fragment;
     //private Context context;
     //private static final int FAULT_LOADER = 11;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    //@Inject
+    //FirebaseDatabase firebaseDatabase;
+
+    @Inject
+    DatabaseReference databaseReference;
+
     ArrayList<Fault> faultArray= new ArrayList<>();
 
-    public FaultListPresenter(){
+    public FaultListPresenter(Context context){
         //this.view=  view;
         //this.fragment= fragment;
         //this.context= context;
-        firebaseDatabase= FirebaseDatabase.getInstance();
-        databaseReference= firebaseDatabase.getReference().child("faults");
+        //firebaseDatabase= FirebaseDatabase.getInstance();
+        //databaseReference= firebaseDatabase.getReference().child("faults");
+        ((FaultRankApplication)context).getAppComponent().inject(this);
 
     }
 
