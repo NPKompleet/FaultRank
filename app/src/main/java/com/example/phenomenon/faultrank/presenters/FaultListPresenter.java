@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -37,27 +38,24 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  *
  */
 
-public class FaultListPresenter /*implements LoaderManager.LoaderCallbacks<Cursor>*/{
+public class FaultListPresenter {
     private IFaultListView view;
-    //private FaultListFragment fragment;
-    //private Context context;
-    //private static final int FAULT_LOADER = 11;
-    //@Inject
-    //FirebaseDatabase firebaseDatabase;
+
 
     @Inject
+    @Nullable
     DatabaseReference databaseReference;
 
     ArrayList<Fault> faultArray= new ArrayList<>();
 
-    public FaultListPresenter(Context context){
-        //this.view=  view;
-        //this.fragment= fragment;
-        //this.context= context;
-        //firebaseDatabase= FirebaseDatabase.getInstance();
-        //databaseReference= firebaseDatabase.getReference().child("faults");
-        ((FaultRankApplication)context).getAppComponent().inject(this);
+    public FaultListPresenter(){
+        //default constructor for test
+    }
 
+    public FaultListPresenter(@Nullable Context context){
+        if (context != null) {
+            ((FaultRankApplication) context).getAppComponent().inject(this);
+        }
     }
 
     public void setView(IFaultListView view){
@@ -65,39 +63,26 @@ public class FaultListPresenter /*implements LoaderManager.LoaderCallbacks<Curso
     }
 
     public void initData(){
-        //fragment.getActivity().getSupportLoaderManager().initLoader(FAULT_LOADER, null, this);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot faultSnapshot: dataSnapshot.getChildren()) {
-                    // handle the faults
-                    Fault fault= faultSnapshot.getValue(Fault.class);
-                    faultArray.add(fault);
+        if(databaseReference != null) {
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot faultSnapshot : dataSnapshot.getChildren()) {
+                        // handle the faults
+                        Fault fault = faultSnapshot.getValue(Fault.class);
+                        faultArray.add(fault);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+            });
+        }
         view.loadData(faultArray);
+
     }
 
-    /*@Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(context, FaultProvider.Faults.CONTENT_URI, null, null, null, null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        view.loadData(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }*/
 }

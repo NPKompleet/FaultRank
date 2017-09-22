@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.fab) FloatingActionButton fab;
 
-    //ArrayList<String> fragState=
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

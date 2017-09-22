@@ -1,5 +1,6 @@
 package com.example.phenomenon.faultrank.dagger;
 
+import com.example.phenomenon.faultrank.FaultDetailFragment;
 import com.example.phenomenon.faultrank.FaultListFragment;
 import com.example.phenomenon.faultrank.presenters.FaultListPresenter;
 
@@ -16,6 +17,7 @@ import dagger.Component;
 public interface AppComponent {
     //inject into fragments
     void inject(FaultListFragment target);
+    void inject(FaultDetailFragment target);
 
     //inject into presenters
     void inject(FaultListPresenter target);
