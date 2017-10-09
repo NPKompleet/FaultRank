@@ -29,6 +29,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/list_faultType"
             android:text="Line"
+            android:singleLine="true"
+            android:ellipsize="end"
             app:layout_constraintStart_toEndOf="@+id/listImage"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"

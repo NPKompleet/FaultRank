@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.phenomenon.faultrank">
+    package="com.npkompleet.phenomenon.faultrank">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-        android:name=".FaultRankApplication"
+        android:name="com.npkompleet.phenomenon.faultrank.FaultRankApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.npkompleet.phenomenon.faultrank.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,17 +27,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
+
         <provider
-            android:name=".provider.generated.FaultProvider"
-            android:authorities="com.example.phenomenon.faultrank.provider.authority"
+            android:name="com.npkompleet.phenomenon.faultrank.provider.generated.FaultProvider"
+            android:authorities="com.npkompleet.phenomenon.faultrank.provider.authority"
             android:exported="false" />
 
         <service
-            android:name=".service.FaultUpdateService"
+            android:name="com.npkompleet.phenomenon.faultrank.service.FaultUpdateService"
             android:exported="false"/>
 
         <service
-            android:name=".service.FaultMessagingService">
+            android:name="com.npkompleet.phenomenon.faultrank.service.FaultMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>

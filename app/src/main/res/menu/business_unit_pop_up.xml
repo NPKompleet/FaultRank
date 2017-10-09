@@ -2,7 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="@string/bu_ikeja"/>
+        android:title="Abule Egba"/>
     <item
-        android:title="@string/bu_shomolu"/>
+        android:title="Akowonjo"/>
+    <item
+        android:title="Ikeja"/>
+    <item
+        android:title="Ikorodu"/>
+    <item
+        android:title="Oshodi"/>
+    <item
+        android:title="Shomolu"/>
 </menu>

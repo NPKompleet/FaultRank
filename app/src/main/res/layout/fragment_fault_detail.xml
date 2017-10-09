@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/add_fault_item_margin"
     android:alpha="0.9"
-    tools:context="com.example.phenomenon.faultrank.FaultDetailFragment">
+    tools:context="com.npkompleet.phenomenon.faultrank.FaultDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="352dp"
             android:layout_height="200dp"
+            android:minWidth="200dp"
             android:src="@drawable/substation"
             android:scaleType="fitXY"
             android:id="@+id/detail_image"
@@ -22,16 +27,153 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteX="8dp" />
 
-        <TextView
+        <android.support.constraint.ConstraintLayout
             android:layout_width="352dp"
-            android:layout_height="201dp"
-            android:text="@string/hello_blank_fragment"
-            android:id="@+id/fault_detail_undertaking"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/detail_image"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/add_fault_item_margin"
-            tools:layout_editor_absoluteX="8dp" />
+            tools:layout_editor_absoluteX="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                tools:layout_editor_absoluteX="0dp"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                 <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Fault Type: "
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:id="@+id/fault_detail_faultType_text"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      tools:text="@string/hello_blank_fragment"
+                      android:textSize="16sp"
+                      android:id="@+id/fault_detail_faultType"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Reported At: "
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:id="@+id/fault_detail_location_text"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      tools:text="@string/hello_blank_fragment"
+                      android:textSize="16sp"
+                      android:id="@+id/fault_detail_location"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Revenue: "
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:id="@+id/fault_detail_revenue_text"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      tools:text="@string/hello_blank_fragment"
+                      android:textSize="16sp"
+                      android:id="@+id/fault_detail_revenue"
+                      app:layout_constraintStart_toEndOf="@+id/fault_detail_revenue_text"
+                      app:layout_constraintTop_toBottomOf="@+id/fault_detail_location"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cost: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/fault_detail_cost_text"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/hello_blank_fragment"
+                    android:textSize="16sp"
+                    android:id="@+id/fault_detail_cost"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/fault_detail_time_text"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/hello_blank_fragment"
+                    android:textSize="16sp"
+                    android:id="@+id/fault_detail_time"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Undertaking: "
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:id="@+id/fault_detail_undertaking_text"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      tools:text="@string/hello_blank_fragment"
+                      android:textSize="16sp"
+                      android:id="@+id/fault_detail_undertaking"
+                      android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Potential revenue: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/hello_blank_fragment"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:id="@+id/fault_detail_porev"
+                    android:layout_margin="@dimen/add_fault_item_margin" />
+
+            </GridLayout>
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.v7.widget.CardView>
